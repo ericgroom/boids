@@ -7,8 +7,11 @@
 
 import Foundation
 
-struct Boid {
+struct Boid: Equatable {
     var position: Vec2
     var velocity: Vec2
     var acceleration: Vec2
+    
+    var showAsBlue: Bool = false
+    var showAsRed: Bool = false
 }

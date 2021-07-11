@@ -35,7 +35,9 @@ struct Flock {
     typealias Context = (t: Date, size: CGSize)
     private var context: Context?
     
-    var visionRadius = 40.0
+    var visionRadius = 200.0
+    var maxSpeed = 500.0
+    var maxForce = 20.0
     
     mutating func update(time: Date, size: CGSize) {
         let context = (t: time, size: size)
@@ -67,29 +69,56 @@ struct Flock {
             let vi = Vec2(x: vxi, y: vyi)
             return Boid(position: pi, velocity: vi, acceleration: .zero)
         }
+        
+        boids[0].showAsRed = true
     }
     
     mutating private func physics(dt: TimeInterval, size: CGSize) {
-        // velocity
+        let snapshot = boids
+        
+        // reset accelleration
         boids = boids.map { boid in
             var boid = boid
+            boid.acceleration = .zero
+            return boid
+        }
+        
+        // cohesion
+        boids = boids.map { boid in
+            var boid = boid
+            var avgPosition = Vec2.zero
+            var count = 0
+            for other in snapshot where other != boid && boid.position.distance(to: other.position) < visionRadius { // potential bug, need identity
+                avgPosition += other.position
+                count += 1
+            }
+
+            if count > 0 {
+                avgPosition /= Double(count)
+            }
+            var steering = avgPosition - boid.position
+            steering.magnitude = maxSpeed
+            steering -= boid.velocity
+            steering.limit(magnitude: maxForce)
+            boid.acceleration += steering
+
+            return boid
+        }
+        
+        // position
+        boids = boids.map { boid in
+            var boid = boid
+            boid.velocity += (boid.acceleration)
+            boid.velocity.limit(magnitude: maxSpeed)
             boid.position += (boid.velocity * dt)
             return boid
         }
         
-        // stay on screen
+        // color
+        let target = boids.first(where: { $0.showAsRed })
         boids = boids.map { boid in
             var boid = boid
-            if boid.position.x > size.width {
-                boid.position.x = 0
-            } else if boid.position.x < 0 {
-                boid.position.x = size.width
-            }
-            if boid.position.y > size.height {
-                boid.position.y = 0
-            } else if boid.position.y < 0 {
-                boid.position.y = size.height
-            }
+            boid.showAsBlue = boid.position.distance(to: target!.position) < visionRadius
             return boid
         }
     }

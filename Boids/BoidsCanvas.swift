@@ -20,7 +20,13 @@ struct BoidsCanvas: View {
                 flock.boids.forEach { boid in
                     let boidContext = context
                     let rect = viewRect(for: boid)
-                    boidContext.fill(Ellipse().path(in: rect), with: .color(.white))
+                    var color = Color.white
+                    if boid.showAsRed {
+                        color = .red
+                    } else if boid.showAsBlue {
+                        color = .blue
+                    }
+                    boidContext.fill(Ellipse().path(in: rect), with: .color(color))
                 }
             }
             .edgesIgnoringSafeArea(.all)
