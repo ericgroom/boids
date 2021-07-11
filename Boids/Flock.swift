@@ -94,19 +94,19 @@ struct Flock {
                 avgVelocity += other.velocity
                 count += 1
             }
-            
+
             if count > 0 {
                 avgVelocity /= Double(count)
+                var steering = avgVelocity
+                steering.magnitude = maxSpeed
+                steering -= boid.velocity
+                steering.limit(magnitude: maxForce)
+                boid.acceleration += steering
             }
-            var steering = avgVelocity - boid.velocity
-            steering.magnitude = maxSpeed
-            steering -= boid.velocity
-            steering.limit(magnitude: maxForce)
-            boid.acceleration += steering
-            
+
             return boid
         }
-        
+
         // cohesion
         boids = boids.map { boid in
             var boid = boid
@@ -119,13 +119,39 @@ struct Flock {
 
             if count > 0 {
                 avgPosition /= Double(count)
+                var steering = avgPosition - boid.position
+                steering.magnitude = maxSpeed
+                steering -= boid.velocity
+                steering.limit(magnitude: maxForce)
+                boid.acceleration += steering
             }
-            var steering = avgPosition - boid.position
-            steering.magnitude = maxSpeed
-            steering -= boid.velocity
-            steering.limit(magnitude: maxForce)
-            boid.acceleration += steering
 
+            return boid
+        }
+        
+        // separation
+        boids = boids.map { boid in
+            var boid = boid
+            var steering = Vec2.zero
+            var count = 0
+            for other in snapshot where other != boid && boid.position.distance(to: other.position) < visionRadius { // potential bug, need identity
+                let distance = boid.position.distance(to: other.position)
+                var diff = boid.position - other.position
+                if distance*distance != 0 {
+                    diff /= distance*distance
+                }
+                steering += diff
+                count += 1
+            }
+
+            if count > 0 {
+                steering /= Double(count)
+                steering.magnitude = maxSpeed
+                steering -= boid.velocity
+                steering.limit(magnitude: maxForce)
+                boid.acceleration += steering
+            }
+            
             return boid
         }
         

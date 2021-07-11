@@ -33,8 +33,13 @@ struct Vec2: Equatable {
     
     mutating func normalize() {
         let magnitude = self.magnitude
-        x /= magnitude
-        y /= magnitude
+        if magnitude != 0 {
+            x /= magnitude
+            y /= magnitude
+        } else {
+            x = 0
+            y = 0
+        }
     }
     
     static let zero = Vec2(x: 0, y: 0)
