@@ -66,7 +66,7 @@ struct Flock {
             // mag^2 = x^2
             // x = mag
             let speed = maxSpeed / 2
-            let vxi = Double.random(in: 0...(speed))
+            let vxi = Double.random(in: (-speed)...(speed))
             let vyi = sqrt(speed * speed - vxi * vxi)
             let vi = Vec2(x: vxi, y: vyi)
             return Boid(position: pi, velocity: vi, acceleration: .zero)
