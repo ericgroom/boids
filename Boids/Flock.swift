@@ -85,6 +85,28 @@ struct Flock {
             return boid
         }
         
+        // alignment
+        boids = boids.map { boid in
+            var boid = boid
+            var avgVelocity = Vec2.zero
+            var count = 0
+            for other in snapshot where other != boid && boid.position.distance(to: other.position) < visionRadius { // potential bug, need identity
+                avgVelocity += other.velocity
+                count += 1
+            }
+            
+            if count > 0 {
+                avgVelocity /= Double(count)
+            }
+            var steering = avgVelocity - boid.velocity
+            steering.magnitude = maxSpeed
+            steering -= boid.velocity
+            steering.limit(magnitude: maxForce)
+            boid.acceleration += steering
+            
+            return boid
+        }
+        
         // cohesion
         boids = boids.map { boid in
             var boid = boid
@@ -104,6 +126,23 @@ struct Flock {
             steering.limit(magnitude: maxForce)
             boid.acceleration += steering
 
+            return boid
+        }
+        
+        // stay on screen
+        boids = boids.map { boid in
+            var boid = boid
+            if boid.position.x > size.width {
+                boid.position.x = 0
+            } else if boid.position.x < 0 {
+                boid.position.x = size.width
+            }
+            
+            if boid.position.y > size.height {
+                boid.position.y = 0
+            } else if boid.position.y < 0 {
+                boid.position.y = size.height
+            }
             return boid
         }
         
