@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Vec2: Equatable {
+struct Vec2: Equatable, Hashable {
     var x: Double
     var y: Double
     
@@ -20,6 +20,10 @@ struct Vec2: Equatable {
             x *= newValue
             y *= newValue
         }
+    }
+    
+    var direction: Double {
+        atan(y/x)
     }
     
     mutating func limit(magnitude: Double) {

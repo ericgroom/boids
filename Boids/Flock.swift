@@ -29,6 +29,66 @@ class FlockWrapper: ObservableObject {
     }
 }
 
+struct SpacialHash<Element> {
+    private let cellSize: CGSize
+    private var store: [Cell: [Element]]
+    private let positionMap: KeyPath<Element, Vec2>
+    
+    private struct Cell: Hashable {
+        let x: Int
+        let y: Int
+        
+        init(x: Int, y: Int) {
+            self.x = x
+            self.y = y
+        }
+    }
+    
+    init(_ elements: [Element], positionMap: KeyPath<Element, Vec2>) {
+        self.cellSize = .init(width: 20, height: 20)
+        self.store = [:]
+        self.positionMap = positionMap
+        for element in elements {
+            insert(element)
+        }
+    }
+    
+    private func cell(for position: Vec2) -> Cell {
+        Cell(x: Int(position.x / cellSize.width), y: Int(position.y / cellSize.height))
+    }
+    
+    mutating func insert(_ element: Element) {
+        let position = element[keyPath: positionMap]
+        let cell = cell(for: position)
+        store[cell, default: []].append(element)
+    }
+    
+    func neighbors(of position: Vec2, within radius: Double) -> Array<Element> {
+        let minX = position.x - radius
+        let minY = position.y - radius
+        let maxX = position.x + radius
+        let maxY = position.y + radius
+        let xs = stride(from: minX, to: maxX, by: cellSize.width)
+        let ys = stride(from: minY, to: maxY, by: cellSize.height)
+        let cells = xs
+            .flatMap { x in
+                ys.map { y in
+                    Vec2(x: x, y: y)
+                }
+            }
+            .map { cell(for: $0) }
+        
+        let elements = cells
+            .flatMap { store[$0, default: []] }
+            .filter { other in
+                let distanceToOther = position.distance(to: other[keyPath: positionMap])
+                return distanceToOther < radius
+            }
+        
+        return elements
+    }
+}
+
 struct Flock {
     var boids: [Boid] = []
     
@@ -51,7 +111,7 @@ struct Flock {
     }
     
     mutating private func initialize(with context: Context) {
-        let boidCount = 30
+        let boidCount = 200
         let xs = 0.0...(Double(context.size.width))
         let ys = 0.0...(Double(context.size.height))
         self.boids = (0..<boidCount).map { _ in
@@ -79,7 +139,7 @@ struct Flock {
     typealias ForceGenerator = (Boid, [Boid]) -> Force
     
     mutating private func physics(dt: TimeInterval, size: CGSize) {
-        let snapshot = boids
+        let snapshot = SpacialHash(boids, positionMap: \.position)
         let config = ForceConfiguration.default
         
         // reset accelleration
@@ -89,33 +149,21 @@ struct Flock {
             return boid
         }
         
-        // alignment
+        // alignment, cohesion, separation
         boids = boids.map { boid in
             var boid = boid
-            var force = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
-            force.limit(magnitude: maxForce)
-            boid.acceleration += force
+            var alignment = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            var cohesion = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            var separation = separationForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            alignment.limit(magnitude: maxForce)
+            cohesion.limit(magnitude: maxForce)
+            separation.limit(magnitude: maxForce)
+            boid.acceleration += alignment
+            boid.acceleration += cohesion
+            boid.acceleration += separation
             return boid
         }
-        
-        // cohesion
-        boids = boids.map { boid in
-            var boid = boid
-            var force = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
-            force.limit(magnitude: maxForce)
-            boid.acceleration += force
-            return boid
-        }
-        
-        // separation
-        boids = boids.map { boid in
-            var boid = boid
-            var force = separationForceGenerator(actOn: boid, boids: boids, configuration: config)
-            force.limit(magnitude: maxForce)
-            boid.acceleration += force
-            return boid
-        }
-        
+                
         // stay on screen
         boids = boids.map { boid in
             var boid = boid
@@ -159,10 +207,10 @@ struct ForceConfiguration {
     static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 500.0)
 }
 
-func alignmentForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
+func alignmentForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Vec2 {
     var avgVelocity = Vec2.zero
     var count = 0
-    for other in boids where other != boid && boid.position.distance(to: other.position) < configuration.visionRadius { // potential bug, need identity
+    for other in boids.neighbors(of: boid.position, within: configuration.visionRadius) where other != boid { // potential bug, need identity
         avgVelocity += other.velocity
         count += 1
     }
@@ -176,10 +224,10 @@ func alignmentForceGenerator(actOn boid: Boid, boids: [Boid], configuration: For
     return steering
 }
 
-func cohesionForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
+func cohesionForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Vec2 {
     var avgPosition = Vec2.zero
     var count = 0
-    for other in boids where other != boid && boid.position.distance(to: other.position) < configuration.visionRadius { // potential bug, need identity
+    for other in boids.neighbors(of: boid.position, within: configuration.visionRadius) where other != boid { // potential bug, need identity
         avgPosition += other.position
         count += 1
     }
@@ -194,12 +242,12 @@ func cohesionForceGenerator(actOn boid: Boid, boids: [Boid], configuration: Forc
     return steering
 }
 
-func separationForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
+func separationForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Vec2 {
     var steering = Vec2.zero
     var count = 0
-    for other in boids where other != boid { // potential bug, need identity
+    for other in boids.neighbors(of: boid.position, within: configuration.visionRadius) where other != boid { // potential bug, need identity
         let distance = boid.position.distance(to: other.position)
-        guard distance < configuration.visionRadius else { continue }
+        guard distance < configuration.visionRadius else { fatalError() }
         
         var diff = boid.position - other.position
         if distance*distance != 0 {
