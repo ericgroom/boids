@@ -57,15 +57,17 @@ struct Flock {
         self.boids = (0..<boidCount).map { _ in
 
             let pi = Vec2(x: .random(in: xs), y: .random(in: ys))
-            // mag = sqrt(x + y)
-            // mag^2 = x + y
-            // y = mag^2 - x
+            // mag = sqrt(x^2 + y^2)
+            // mag^2 = x^2 + y^2
+            // y^2 = mag^2 - x^2
+            // y = sqrt(mag^2 - x^2)
             // assuming y = 0
-            // mag = sqrt(x + 0)
-            // mag^2 = x
-            let speed = 10.0
-            let vxi = Double.random(in: 0...(speed * speed))
-            let vyi = speed * speed - vxi
+            // mag = sqrt(x^2 + 0)
+            // mag^2 = x^2
+            // x = mag
+            let speed = maxSpeed / 2
+            let vxi = Double.random(in: 0...(speed))
+            let vyi = sqrt(speed * speed - vxi * vxi)
             let vi = Vec2(x: vxi, y: vyi)
             return Boid(position: pi, velocity: vi, acceleration: .zero)
         }
