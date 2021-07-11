@@ -23,7 +23,7 @@ struct Vec2: Equatable, Hashable {
     }
     
     var direction: Double {
-        atan(y/x)
+        atan2(y, x)
     }
     
     mutating func limit(magnitude: Double) {

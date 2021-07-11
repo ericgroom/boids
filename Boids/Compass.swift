@@ -19,7 +19,6 @@ class Compass: NSObject {
     var angle: Double? {
         guard let trueHeading = heading?.magneticHeading else { return nil }
         guard trueHeading >= 0 else { return nil }
-        print("accuracy: \(heading?.headingAccuracy)")
         return trueHeading
     }
     
