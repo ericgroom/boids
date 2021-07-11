@@ -20,12 +20,7 @@ struct BoidsCanvas: View {
                 flock.boids.forEach { boid in
                     let boidContext = context
                     let rect = viewRect(for: boid)
-                    var color = Color.white
-                    if boid.showAsRed {
-                        color = .red
-                    } else if boid.showAsBlue {
-                        color = .blue
-                    }
+                    let color = Color.white
                     boidContext.fill(BoidShape().rotation(Angle(radians: boid.velocity.direction + Double.pi/2)).path(in: rect), with: .color(color))
                 }
             }

@@ -111,7 +111,7 @@ struct Flock {
     }
     
     mutating private func initialize(with context: Context) {
-        let boidCount = 30
+        let boidCount = 10
         let xs = 0.0...(Double(context.size.width))
         let ys = 0.0...(Double(context.size.height))
         self.boids = (0..<boidCount).map { _ in
@@ -131,12 +131,10 @@ struct Flock {
             let vi = Vec2(x: vxi, y: vyi)
             return Boid(position: pi, velocity: vi, acceleration: .zero)
         }
-        
-        boids[0].showAsRed = true
     }
     
     typealias Force = Vec2
-    typealias ForceGenerator = (Boid, [Boid]) -> Force
+    typealias ForceGenerator = (Boid, SpacialHash<Boid>, ForceConfiguration) -> Force
     
     mutating private func physics(dt: TimeInterval, size: CGSize) {
         let snapshot = SpacialHash(boids, positionMap: \.position)
@@ -150,20 +148,20 @@ struct Flock {
         }
         
         // alignment, cohesion, separation
+        let forceGenerators: [(ForceGenerator, Double)] = [
+            (alignmentForceGenerator, 0.25),
+            (cohesionForceGenerator, 0.25),
+            (separationForceGenerator, 0.25),
+            (northForceGenerator, 0.1),
+        ]
         boids = boids.map { boid in
             var boid = boid
-            var alignment = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
-            var cohesion = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
-            var separation = separationForceGenerator(actOn: boid, boids: snapshot, configuration: config)
-            var north = northForceGenerator(actOn: boid, boids: snapshot, configuration: config)
-            alignment.limit(magnitude: maxForce)
-            cohesion.limit(magnitude: maxForce)
-            separation.limit(magnitude: maxForce)
-            north.limit(magnitude: maxForce/2)
-            boid.acceleration += alignment
-            boid.acceleration += cohesion
-            boid.acceleration += separation
-            boid.acceleration += north
+            for (forceGenerator, importance) in forceGenerators {
+                var force = forceGenerator(boid, snapshot, config)
+                force.limit(magnitude: maxForce)
+                force *= importance
+                boid.acceleration += force
+            }
             return boid
         }
                 
@@ -190,14 +188,6 @@ struct Flock {
             boid.velocity += (boid.acceleration)
             boid.velocity.limit(magnitude: maxSpeed)
             boid.position += (boid.velocity * dt)
-            return boid
-        }
-        
-        // color
-        let target = boids.first(where: { $0.showAsRed })
-        boids = boids.map { boid in
-            var boid = boid
-            boid.showAsBlue = boid.position.distance(to: target!.position) < visionRadius
             return boid
         }
     }
