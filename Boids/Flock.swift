@@ -75,8 +75,12 @@ struct Flock {
         boids[0].showAsRed = true
     }
     
+    typealias Force = Vec2
+    typealias ForceGenerator = (Boid, [Boid]) -> Force
+    
     mutating private func physics(dt: TimeInterval, size: CGSize) {
         let snapshot = boids
+        let config = ForceConfiguration.default
         
         // reset accelleration
         boids = boids.map { boid in
@@ -88,70 +92,24 @@ struct Flock {
         // alignment
         boids = boids.map { boid in
             var boid = boid
-            var avgVelocity = Vec2.zero
-            var count = 0
-            for other in snapshot where other != boid && boid.position.distance(to: other.position) < visionRadius { // potential bug, need identity
-                avgVelocity += other.velocity
-                count += 1
-            }
-
-            if count > 0 {
-                avgVelocity /= Double(count)
-                var steering = avgVelocity
-                steering.magnitude = maxSpeed
-                steering -= boid.velocity
-                steering.limit(magnitude: maxForce)
-                boid.acceleration += steering
-            }
-
+            let force = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            boid.acceleration += force
             return boid
         }
-
+        
         // cohesion
         boids = boids.map { boid in
             var boid = boid
-            var avgPosition = Vec2.zero
-            var count = 0
-            for other in snapshot where other != boid && boid.position.distance(to: other.position) < visionRadius { // potential bug, need identity
-                avgPosition += other.position
-                count += 1
-            }
-
-            if count > 0 {
-                avgPosition /= Double(count)
-                var steering = avgPosition - boid.position
-                steering.magnitude = maxSpeed
-                steering -= boid.velocity
-                steering.limit(magnitude: maxForce)
-                boid.acceleration += steering
-            }
-
+            let force = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            boid.acceleration += force
             return boid
         }
         
         // separation
         boids = boids.map { boid in
             var boid = boid
-            var steering = Vec2.zero
-            var count = 0
-            for other in snapshot where other != boid && boid.position.distance(to: other.position) < visionRadius { // potential bug, need identity
-                let distance = boid.position.distance(to: other.position)
-                var diff = boid.position - other.position
-                if distance*distance != 0 {
-                    diff /= distance*distance
-                }
-                steering += diff
-                count += 1
-            }
-
-            if count > 0 {
-                steering /= Double(count)
-                steering.magnitude = maxSpeed
-                steering -= boid.velocity
-                steering.limit(magnitude: maxForce)
-                boid.acceleration += steering
-            }
-            
+            let force = separationForceGenerator(actOn: boid, boids: boids, configuration: config)
+            boid.acceleration += force
             return boid
         }
         
@@ -189,4 +147,73 @@ struct Flock {
             return boid
         }
     }
+}
+
+struct ForceConfiguration {
+    let visionRadius: Double
+    let maxSpeed: Double
+    let maxForce: Double
+    
+    static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 500.0, maxForce: 20.0)
+}
+
+func alignmentForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
+    var avgVelocity = Vec2.zero
+    var count = 0
+    for other in boids where other != boid && boid.position.distance(to: other.position) < configuration.visionRadius { // potential bug, need identity
+        avgVelocity += other.velocity
+        count += 1
+    }
+    
+    var steering = avgVelocity
+    if count > 0 {
+        steering /= Double(count)
+        steering.magnitude = configuration.maxSpeed
+        steering -= boid.velocity
+        steering.limit(magnitude: configuration.maxForce)
+    }
+    return steering
+}
+
+func cohesionForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
+    var avgPosition = Vec2.zero
+    var count = 0
+    for other in boids where other != boid && boid.position.distance(to: other.position) < configuration.visionRadius { // potential bug, need identity
+        avgPosition += other.position
+        count += 1
+    }
+
+    var steering = avgPosition
+    if count > 0 {
+        steering /= Double(count)
+        steering -= boid.position
+        steering.magnitude = configuration.maxSpeed
+        steering -= boid.velocity
+        steering.limit(magnitude: configuration.maxForce)
+    }
+    return steering
+}
+
+func separationForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
+    var steering = Vec2.zero
+    var count = 0
+    for other in boids where other != boid { // potential bug, need identity
+        let distance = boid.position.distance(to: other.position)
+        guard distance < configuration.visionRadius else { continue }
+        
+        var diff = boid.position - other.position
+        if distance*distance != 0 {
+            diff /= distance*distance
+        }
+        steering += diff
+        count += 1
+    }
+
+    if count > 0 {
+        steering /= Double(count)
+        steering.magnitude = configuration.maxSpeed
+        steering -= boid.velocity
+        steering.limit(magnitude: configuration.maxForce)
+    }
+    return steering
 }
