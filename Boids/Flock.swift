@@ -92,7 +92,8 @@ struct Flock {
         // alignment
         boids = boids.map { boid in
             var boid = boid
-            let force = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            var force = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            force.limit(magnitude: maxForce)
             boid.acceleration += force
             return boid
         }
@@ -100,7 +101,8 @@ struct Flock {
         // cohesion
         boids = boids.map { boid in
             var boid = boid
-            let force = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            var force = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            force.limit(magnitude: maxForce)
             boid.acceleration += force
             return boid
         }
@@ -108,7 +110,8 @@ struct Flock {
         // separation
         boids = boids.map { boid in
             var boid = boid
-            let force = separationForceGenerator(actOn: boid, boids: boids, configuration: config)
+            var force = separationForceGenerator(actOn: boid, boids: boids, configuration: config)
+            force.limit(magnitude: maxForce)
             boid.acceleration += force
             return boid
         }
@@ -152,9 +155,8 @@ struct Flock {
 struct ForceConfiguration {
     let visionRadius: Double
     let maxSpeed: Double
-    let maxForce: Double
     
-    static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 500.0, maxForce: 20.0)
+    static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 500.0)
 }
 
 func alignmentForceGenerator(actOn boid: Boid, boids: [Boid], configuration: ForceConfiguration) -> Vec2 {
@@ -170,7 +172,6 @@ func alignmentForceGenerator(actOn boid: Boid, boids: [Boid], configuration: For
         steering /= Double(count)
         steering.magnitude = configuration.maxSpeed
         steering -= boid.velocity
-        steering.limit(magnitude: configuration.maxForce)
     }
     return steering
 }
@@ -189,7 +190,6 @@ func cohesionForceGenerator(actOn boid: Boid, boids: [Boid], configuration: Forc
         steering -= boid.position
         steering.magnitude = configuration.maxSpeed
         steering -= boid.velocity
-        steering.limit(magnitude: configuration.maxForce)
     }
     return steering
 }
@@ -213,7 +213,6 @@ func separationForceGenerator(actOn boid: Boid, boids: [Boid], configuration: Fo
         steering /= Double(count)
         steering.magnitude = configuration.maxSpeed
         steering -= boid.velocity
-        steering.limit(magnitude: configuration.maxForce)
     }
     return steering
 }
