@@ -96,7 +96,7 @@ struct Flock {
     private var context: Context?
     
     var visionRadius = 200.0
-    var maxSpeed = 500.0
+    var maxSpeed = 300.0
     var maxForce = 20.0
     
     mutating func update(time: Date, size: CGSize) {
@@ -111,7 +111,7 @@ struct Flock {
     }
     
     mutating private func initialize(with context: Context) {
-        let boidCount = 200
+        let boidCount = 30
         let xs = 0.0...(Double(context.size.width))
         let ys = 0.0...(Double(context.size.height))
         self.boids = (0..<boidCount).map { _ in
@@ -155,12 +155,15 @@ struct Flock {
             var alignment = alignmentForceGenerator(actOn: boid, boids: snapshot, configuration: config)
             var cohesion = cohesionForceGenerator(actOn: boid, boids: snapshot, configuration: config)
             var separation = separationForceGenerator(actOn: boid, boids: snapshot, configuration: config)
+            var north = northForceGenerator(actOn: boid, boids: snapshot, configuration: config)
             alignment.limit(magnitude: maxForce)
             cohesion.limit(magnitude: maxForce)
             separation.limit(magnitude: maxForce)
+            north.limit(magnitude: maxForce/2)
             boid.acceleration += alignment
             boid.acceleration += cohesion
             boid.acceleration += separation
+            boid.acceleration += north
             return boid
         }
                 
@@ -204,7 +207,7 @@ struct ForceConfiguration {
     let visionRadius: Double
     let maxSpeed: Double
     
-    static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 500.0)
+    static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 300.0)
 }
 
 func alignmentForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Vec2 {
@@ -259,6 +262,24 @@ func separationForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, config
 
     if count > 0 {
         steering /= Double(count)
+        steering.magnitude = configuration.maxSpeed
+        steering -= boid.velocity
+    }
+    return steering
+}
+
+func northForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Vec2 {
+    var steering = Vec2.zero
+    if let heading = Compass.shared.angle {
+        var radiansHeading = heading * Double.pi / 180
+        let phaseShift = -(Double.pi/2)
+        radiansHeading += phaseShift
+        // after phase shift, north is 0, pi/2 is east, pi is south, 3pi/2 is west
+        // we want north is 0, pi/2 is west, pi is south, 3pi/2 is east.
+        // so we just negate the x result to reflect across the y axis
+        let x = -cos(radiansHeading)
+        let y = sin(radiansHeading)
+        steering = Vec2(x: x, y: y)
         steering.magnitude = configuration.maxSpeed
         steering -= boid.velocity
     }
