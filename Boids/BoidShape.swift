@@ -16,7 +16,8 @@ struct BoidShape: Shape {
         
         path.move(to: top)
         path.addLine(to: left)
-        path.addLine(to: right)
+        let curveOffset = rect.height*0.2
+        path.addQuadCurve(to: right, control: CGPoint(x: rect.midX, y: rect.maxY-curveOffset))
         path.addLine(to: top)
         return path
     }
