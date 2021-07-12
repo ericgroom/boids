@@ -15,8 +15,8 @@ class FlockWrapper: ObservableObject {
         self.flock = Flock()
     }
     
-    func update(time: Date, size: CGSize) {
-        flock.update(time: time, size: size)
+    func update(time: Date, size: CGSize, northernForceEnabled: Bool) {
+        flock.update(time: time, size: size, northernForceEnabled: northernForceEnabled)
     }
     
     subscript<T>(dynamicMember keyPath: KeyPath<Flock, T>) -> T {
@@ -98,9 +98,11 @@ struct Flock {
     var visionRadius = 200.0
     var maxSpeed = 300.0
     var maxForce = 20.0
+    var northernForceEnabled = false
     
-    mutating func update(time: Date, size: CGSize) {
+    mutating func update(time: Date, size: CGSize, northernForceEnabled: Bool) {
         let context = (t: time, size: size)
+        self.northernForceEnabled = northernForceEnabled
         if let previousContext = self.context {
             let dt = context.t.timeIntervalSinceReferenceDate - previousContext.t.timeIntervalSinceReferenceDate
             physics(dt: dt, size: context.size)
@@ -111,7 +113,7 @@ struct Flock {
     }
     
     mutating private func initialize(with context: Context) {
-        let boidCount = 10
+        let boidCount = 30
         let xs = 0.0...(Double(context.size.width))
         let ys = 0.0...(Double(context.size.height))
         self.boids = (0..<boidCount).map { _ in
@@ -152,7 +154,7 @@ struct Flock {
             (alignmentForceGenerator, 0.25),
             (cohesionForceGenerator, 0.25),
             (separationForceGenerator, 0.25),
-            (northForceGenerator, 0.1),
+            (northForceGenerator, northernForceEnabled ? 0.1 : 0.0),
         ]
         boids = boids.map { boid in
             var boid = boid

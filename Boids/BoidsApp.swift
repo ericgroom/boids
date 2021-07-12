@@ -11,7 +11,7 @@ import SwiftUI
 struct BoidsApp: App {
     var body: some Scene {
         WindowGroup {
-            BoidsCanvas()
+            BoidsView()
         }
     }
 }
