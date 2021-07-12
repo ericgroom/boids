@@ -10,7 +10,6 @@
 		BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61E637269B89C600CCBFFB /* BoidShape.swift */; };
 		BA7F351E269B775B001FE93D /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F351D269B775B001FE93D /* Compass.swift */; };
 		BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */; };
-		BA99E2F2269A3BFB00A97DFD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2F1269A3BFB00A97DFD /* ContentView.swift */; };
 		BA99E2F4269A3BFC00A97DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */; };
 		BA99E2F7269A3BFC00A97DFD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F6269A3BFC00A97DFD /* Preview Assets.xcassets */; };
 		BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */; };
@@ -24,7 +23,6 @@
 		BA7F351D269B775B001FE93D /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
 		BA99E2EC269A3BFB00A97DFD /* Boids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsApp.swift; sourceTree = "<group>"; };
-		BA99E2F1269A3BFB00A97DFD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA99E2F6269A3BFC00A97DFD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsCanvas.swift; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 			isa = PBXGroup;
 			children = (
 				BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */,
-				BA99E2F1269A3BFB00A97DFD /* ContentView.swift */,
 				BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */,
 				BA61E637269B89C600CCBFFB /* BoidShape.swift */,
 				BAEDE4D6269A469E002B2BCE /* Vec2.swift */,
@@ -157,7 +154,6 @@
 			files = (
 				BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */,
 				BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */,
-				BA99E2F2269A3BFB00A97DFD /* ContentView.swift in Sources */,
 				BAEDE4D7269A469E002B2BCE /* Vec2.swift in Sources */,
 				BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */,
 				BA7F351E269B775B001FE93D /* Compass.swift in Sources */,
