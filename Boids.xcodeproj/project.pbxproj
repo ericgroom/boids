@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA060F4C269CA43400F27575 /* SpacialHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4B269CA43400F27575 /* SpacialHash.swift */; };
+		BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4D269CA49600F27575 /* ForceGenerators.swift */; };
 		BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6143B2269BBF91000DEEAF /* BoidsView.swift */; };
 		BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61E637269B89C600CCBFFB /* BoidShape.swift */; };
 		BA7F351E269B775B001FE93D /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F351D269B775B001FE93D /* Compass.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA060F4B269CA43400F27575 /* SpacialHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialHash.swift; sourceTree = "<group>"; };
+		BA060F4D269CA49600F27575 /* ForceGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceGenerators.swift; sourceTree = "<group>"; };
 		BA6143B2269BBF91000DEEAF /* BoidsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsView.swift; sourceTree = "<group>"; };
 		BA61E637269B89C600CCBFFB /* BoidShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidShape.swift; sourceTree = "<group>"; };
 		BA7F351D269B775B001FE93D /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
@@ -44,6 +48,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA060F48269CA3EB00F27575 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */,
+				BA6143B2269BBF91000DEEAF /* BoidsView.swift */,
+				BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */,
+				BA61E637269B89C600CCBFFB /* BoidShape.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA060F49269CA3F100F27575 /* Simulation */ = {
+			isa = PBXGroup;
+			children = (
+				BAEDE4D6269A469E002B2BCE /* Vec2.swift */,
+				BAEDE4D8269A487F002B2BCE /* Boid.swift */,
+				BAEDE4DA269A48B8002B2BCE /* Flock.swift */,
+				BA060F4D269CA49600F27575 /* ForceGenerators.swift */,
+			);
+			path = Simulation;
+			sourceTree = "<group>";
+		};
+		BA060F4A269CA40600F27575 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BA7F351D269B775B001FE93D /* Compass.swift */,
+				BA060F4B269CA43400F27575 /* SpacialHash.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		BA99E2E3269A3BFA00A97DFD = {
 			isa = PBXGroup;
 			children = (
@@ -63,14 +98,9 @@
 		BA99E2EE269A3BFB00A97DFD /* Boids */ = {
 			isa = PBXGroup;
 			children = (
-				BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */,
-				BA6143B2269BBF91000DEEAF /* BoidsView.swift */,
-				BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */,
-				BA61E637269B89C600CCBFFB /* BoidShape.swift */,
-				BAEDE4D6269A469E002B2BCE /* Vec2.swift */,
-				BAEDE4D8269A487F002B2BCE /* Boid.swift */,
-				BAEDE4DA269A48B8002B2BCE /* Flock.swift */,
-				BA7F351D269B775B001FE93D /* Compass.swift */,
+				BA060F49269CA3F100F27575 /* Simulation */,
+				BA060F48269CA3EB00F27575 /* View */,
+				BA060F4A269CA40600F27575 /* Utils */,
 				BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */,
 				BA99E2F5269A3BFC00A97DFD /* Preview Content */,
 			);
@@ -157,8 +187,10 @@
 			files = (
 				BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */,
 				BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */,
+				BA060F4C269CA43400F27575 /* SpacialHash.swift in Sources */,
 				BAEDE4D7269A469E002B2BCE /* Vec2.swift in Sources */,
 				BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */,
+				BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */,
 				BA7F351E269B775B001FE93D /* Compass.swift in Sources */,
 				BAEDE4D9269A487F002B2BCE /* Boid.swift in Sources */,
 				BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */,
