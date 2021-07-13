@@ -45,7 +45,10 @@ struct Flock {
         self.northernForceEnabled = northernForceEnabled
         if let previousContext = self.context {
             let dt = context.t.timeIntervalSinceReferenceDate - previousContext.t.timeIntervalSinceReferenceDate
+            let now = DispatchTime.now()
             physics(dt: dt, size: context.size)
+            let after = DispatchTime.now()
+            print("Delta \(now.distance(to: after))")
         } else {
             initialize(with: context)
         }
@@ -76,7 +79,9 @@ struct Flock {
     }
     
     mutating private func physics(dt: TimeInterval, size: CGSize) {
-        let snapshot = SpacialHash(boids, positionMap: \.position)
+        let snapshot = QuadTree(region: Region(x: 0, y: 0, width: size.width, height: size.height), capacity: 4, elements: boids, positionMap: \.position)
+//        let snapshot = SpacialHash(boids, positionMap: \.position)
+//        let snapshot = boids
         let config = ForceConfiguration.default
         
         // reset accelleration

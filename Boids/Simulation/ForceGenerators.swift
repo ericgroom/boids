@@ -8,7 +8,26 @@
 import Foundation
 
 typealias Force = Vec2
-typealias ForceGenerator = (Boid, SpacialHash<Boid>, ForceConfiguration) -> Force
+typealias ForceGenerator = (Boid, NeighborFinder, ForceConfiguration) -> Force
+
+protocol NeighborFinder {
+    func query(within radius: Double, of position: Vec2) -> [Boid]
+}
+
+extension SpacialHash: NeighborFinder where Element == Boid {
+    
+}
+extension QuadTree: NeighborFinder where Element == Boid {
+    
+}
+
+extension Array: NeighborFinder where Element == Boid {
+    func query(within radius: Double, of position: Vec2) -> [Boid] {
+        filter { other in
+            position.distance(to: other.position) <= radius
+        }
+    }
+}
 
 struct ForceConfiguration {
     let visionRadius: Double
@@ -17,7 +36,7 @@ struct ForceConfiguration {
     static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 300.0)
 }
 
-func alignmentForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
+func alignmentForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var avgVelocity = Vec2.zero
     var count = 0
     for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
@@ -34,7 +53,7 @@ func alignmentForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configu
     return steering
 }
 
-func cohesionForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
+func cohesionForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var avgPosition = Vec2.zero
     var count = 0
     for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
@@ -52,7 +71,7 @@ func cohesionForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configur
     return steering
 }
 
-func separationForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
+func separationForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var steering = Vec2.zero
     var count = 0
     for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
@@ -75,7 +94,7 @@ func separationForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, config
     return steering
 }
 
-func northForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
+func northForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var steering = Vec2.zero
     if let heading = Compass.shared.angle {
         var radiansHeading = heading * Double.pi / 180

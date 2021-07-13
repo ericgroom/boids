@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Not used, implementation is sound but dictionary lookups on `store` are **incredibly** slow for some reason. Like 80-90% of total execution time, QuadTree wins out even without COW
 struct SpacialHash<Element> {
     private let cellSize: Size
     private var store: [Cell: [Element]]
