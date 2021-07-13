@@ -20,7 +20,7 @@ struct ForceConfiguration {
 func alignmentForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
     var avgVelocity = Vec2.zero
     var count = 0
-    for other in boids.neighbors(of: boid.position, within: configuration.visionRadius) where other != boid { // potential bug, need identity
+    for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
         avgVelocity += other.velocity
         count += 1
     }
@@ -37,7 +37,7 @@ func alignmentForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configu
 func cohesionForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
     var avgPosition = Vec2.zero
     var count = 0
-    for other in boids.neighbors(of: boid.position, within: configuration.visionRadius) where other != boid { // potential bug, need identity
+    for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
         avgPosition += other.position
         count += 1
     }
@@ -55,7 +55,7 @@ func cohesionForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configur
 func separationForceGenerator(actOn boid: Boid, boids: SpacialHash<Boid>, configuration: ForceConfiguration) -> Force {
     var steering = Vec2.zero
     var count = 0
-    for other in boids.neighbors(of: boid.position, within: configuration.visionRadius) where other != boid { // potential bug, need identity
+    for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
         let distance = boid.position.distance(to: other.position)
         guard distance < configuration.visionRadius else { fatalError() }
         

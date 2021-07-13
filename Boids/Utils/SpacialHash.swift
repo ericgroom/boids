@@ -6,10 +6,9 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct SpacialHash<Element> {
-    private let cellSize: CGSize
+    private let cellSize: Size
     private var store: [Cell: [Element]]
     private let positionMap: KeyPath<Element, Vec2>
     
@@ -42,28 +41,48 @@ struct SpacialHash<Element> {
         store[cell, default: []].append(element)
     }
     
-    func neighbors(of position: Vec2, within radius: Double) -> Array<Element> {
-        let minX = position.x - radius
-        let minY = position.y - radius
-        let maxX = position.x + radius
-        let maxY = position.y + radius
-        let xs = stride(from: minX, to: maxX, by: cellSize.width)
-        let ys = stride(from: minY, to: maxY, by: cellSize.height)
-        let cells = xs
-            .flatMap { x in
-                ys.map { y in
-                    Vec2(x: x, y: y)
+    func query(region: Region) -> [Element] {
+        let minX = region.x
+        let minY = region.y
+        let maxX = region.x + region.width
+        let maxY = region.y + region.height
+        let minCellX = Int(minX/cellSize.width)
+        let maxCellX = Int(maxX/cellSize.width)
+        let minCellY = Int(minY/cellSize.height)
+        let maxCellY = Int(maxY/cellSize.height)
+        var results = [Element]()
+        for xCell in minCellX...maxCellX {
+            for yCell in minCellY...maxCellY {
+                let cell = Cell(x: xCell, y: yCell)
+                let elements = store[cell, default: []]
+                let regionMinX = Double(cell.x) * cellSize.width
+                let regionMinY = Double(cell.y) * cellSize.height
+                let cellRegion = Region(x: regionMinX, y: regionMinY, width: cellSize.width, height: cellSize.height)
+                // check if cell region is within main region
+                if region.contains(cellRegion) {
+                    results.append(contentsOf: elements)
+                } else {
+                    for element in elements {
+                        guard region.contains(element[keyPath: positionMap]) else { continue }
+                        results.append(element)
+                    }
                 }
             }
-            .map { cell(for: $0) }
+        }
+        return results
+    }
+    
+    func query(within radius: Double, of position: Vec2) -> [Element] {
+        let x = position.x - radius
+        let y = position.y - radius
+        let width = position.x + 2 * radius
+        let height = position.y + 2 * radius
+        let approximateRegion = Region(x: x, y: y, width: width, height: height)
         
-        let elements = cells
-            .flatMap { store[$0, default: []] }
+        return query(region: approximateRegion)
             .filter { other in
-                let distanceToOther = position.distance(to: other[keyPath: positionMap])
-                return distanceToOther < radius
+                let otherPosition = other[keyPath: positionMap]
+                return position.distance(to: otherPosition) <= radius
             }
-        
-        return elements
     }
 }
