@@ -14,13 +14,6 @@ protocol NeighborFinder {
     func query(within radius: Double, of position: Vec2) -> [Boid]
 }
 
-extension SpacialHash: NeighborFinder where Element == Boid {
-    
-}
-extension QuadTree: NeighborFinder where Element == Boid {
-    
-}
-
 extension Array: NeighborFinder where Element == Boid {
     func query(within radius: Double, of position: Vec2) -> [Boid] {
         filter { other in

@@ -7,14 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA060F4C269CA43400F27575 /* SpacialHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4B269CA43400F27575 /* SpacialHash.swift */; };
 		BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4D269CA49600F27575 /* ForceGenerators.swift */; };
-		BA060F50269CA5DE00F27575 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4F269CA5DE00F27575 /* Size.swift */; };
-		BA060F52269CA60F00F27575 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F51269CA60F00F27575 /* Region.swift */; };
 		BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6143B2269BBF91000DEEAF /* BoidsView.swift */; };
 		BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61E637269B89C600CCBFFB /* BoidShape.swift */; };
 		BA7F351E269B775B001FE93D /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F351D269B775B001FE93D /* Compass.swift */; };
-		BA85525D269D1EA900AA79F7 /* QuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85525C269D1EA900AA79F7 /* QuadTree.swift */; };
 		BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */; };
 		BA99E2F4269A3BFC00A97DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */; };
 		BA99E2F7269A3BFC00A97DFD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F6269A3BFC00A97DFD /* Preview Assets.xcassets */; };
@@ -25,14 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BA060F4B269CA43400F27575 /* SpacialHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialHash.swift; sourceTree = "<group>"; };
 		BA060F4D269CA49600F27575 /* ForceGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceGenerators.swift; sourceTree = "<group>"; };
-		BA060F4F269CA5DE00F27575 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		BA060F51269CA60F00F27575 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		BA6143B2269BBF91000DEEAF /* BoidsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsView.swift; sourceTree = "<group>"; };
 		BA61E637269B89C600CCBFFB /* BoidShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidShape.swift; sourceTree = "<group>"; };
 		BA7F351D269B775B001FE93D /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
-		BA85525C269D1EA900AA79F7 /* QuadTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadTree.swift; sourceTree = "<group>"; };
 		BA99E2EC269A3BFB00A97DFD /* Boids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsApp.swift; sourceTree = "<group>"; };
 		BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,11 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7F351D269B775B001FE93D /* Compass.swift */,
-				BA060F4B269CA43400F27575 /* SpacialHash.swift */,
-				BA85525C269D1EA900AA79F7 /* QuadTree.swift */,
 				BAEDE4D6269A469E002B2BCE /* Vec2.swift */,
-				BA060F51269CA60F00F27575 /* Region.swift */,
-				BA060F4F269CA5DE00F27575 /* Size.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -194,12 +182,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA060F50269CA5DE00F27575 /* Size.swift in Sources */,
 				BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */,
 				BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */,
-				BA060F52269CA60F00F27575 /* Region.swift in Sources */,
-				BA85525D269D1EA900AA79F7 /* QuadTree.swift in Sources */,
-				BA060F4C269CA43400F27575 /* SpacialHash.swift in Sources */,
 				BAEDE4D7269A469E002B2BCE /* Vec2.swift in Sources */,
 				BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */,
 				BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */,

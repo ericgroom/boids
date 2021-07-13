@@ -79,9 +79,7 @@ struct Flock {
     }
     
     mutating private func physics(dt: TimeInterval, size: CGSize) {
-        let snapshot = QuadTree(region: Region(x: 0, y: 0, width: size.width, height: size.height), capacity: 4, elements: boids, positionMap: \.position)
-//        let snapshot = SpacialHash(boids, positionMap: \.position)
-//        let snapshot = boids
+        let snapshot = boids
         let config = ForceConfiguration.default
         
         // reset accelleration
