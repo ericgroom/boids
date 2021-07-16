@@ -22,6 +22,9 @@ struct Vec2: Equatable, Hashable {
         }
     }
     
+    /*
+     Uses atan2 so the return value is within [-𝜋, 𝜋]
+     */
     var direction: Double {
         atan2(y, x)
     }
@@ -44,6 +47,12 @@ struct Vec2: Equatable, Hashable {
             x = 0
             y = 0
         }
+    }
+    
+    var normalized: Vec2 {
+        var copy = self
+        copy.normalize()
+        return copy
     }
     
     static let zero = Vec2(x: 0, y: 0)
