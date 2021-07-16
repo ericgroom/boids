@@ -91,7 +91,7 @@ struct Flock {
             (alignmentForceGenerator, 0.25),
             (cohesionForceGenerator, 0.25),
             (separationForceGenerator, 0.25),
-            (northForceGenerator, northernForceEnabled ? 0.1 : 0.0),
+            (northForceGenerator, northernForceEnabled ? 0.02 : 0.0),
         ]
         boids = boids.map { boid in
             var boid = boid
