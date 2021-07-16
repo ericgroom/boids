@@ -45,10 +45,7 @@ struct Flock {
         self.northernForceEnabled = northernForceEnabled
         if let previousContext = self.context {
             let dt = context.t.timeIntervalSinceReferenceDate - previousContext.t.timeIntervalSinceReferenceDate
-            let now = DispatchTime.now()
             physics(dt: dt, size: context.size)
-            let after = DispatchTime.now()
-            print("Delta \(now.distance(to: after))")
         } else {
             initialize(with: context)
         }
