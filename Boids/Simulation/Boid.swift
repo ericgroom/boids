@@ -6,9 +6,21 @@
 //
 
 import Foundation
+import SwiftUI
+
+let boidColors = [
+    Color("Blue"),
+    Color("Cyan"),
+    Color("Red"),
+    Color("Yellow"),
+    Color("Green"),
+    Color("Magenta")
+]
 
 struct Boid: Equatable {
     var position: Vec2
     var velocity: Vec2
     var acceleration: Vec2
+    
+    let color: Color = boidColors.randomElement()!
 }
