@@ -23,16 +23,15 @@ extension Array: NeighborFinder where Element == Boid {
 }
 
 struct ForceConfiguration {
-    let visionRadius: Double
     let maxSpeed: Double
     
-    static let `default` = ForceConfiguration(visionRadius: 200.0, maxSpeed: 300.0)
+    static let `default` = ForceConfiguration(maxSpeed: 300.0)
 }
 
 func alignmentForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var avgVelocity = Vec2.zero
     var count = 0
-    for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
+    for other in boids.query(within: boid.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
         avgVelocity += other.velocity
         count += 1
     }
@@ -49,7 +48,7 @@ func alignmentForceGenerator(actOn boid: Boid, boids: NeighborFinder, configurat
 func cohesionForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var avgPosition = Vec2.zero
     var count = 0
-    for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
+    for other in boids.query(within: boid.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
         avgPosition += other.position
         count += 1
     }
@@ -67,9 +66,9 @@ func cohesionForceGenerator(actOn boid: Boid, boids: NeighborFinder, configurati
 func separationForceGenerator(actOn boid: Boid, boids: NeighborFinder, configuration: ForceConfiguration) -> Force {
     var steering = Vec2.zero
     var count = 0
-    for other in boids.query(within: configuration.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
+    for other in boids.query(within: boid.visionRadius, of: boid.position) where other != boid { // potential bug, need identity
         let distance = boid.position.distance(to: other.position)
-        guard distance < configuration.visionRadius else { fatalError() }
+        guard distance < boid.visionRadius else { fatalError() }
         
         var diff = boid.position - other.position
         if distance*distance != 0 {

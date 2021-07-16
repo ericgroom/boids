@@ -71,7 +71,7 @@ struct Flock {
             let vxi = Double.random(in: (-speed)...(speed))
             let vyi = sqrt(speed * speed - vxi * vxi)
             let vi = Vec2(x: vxi, y: vyi)
-            return Boid(position: pi, velocity: vi, acceleration: .zero)
+            return Boid(position: pi, velocity: vi, acceleration: .zero, visionRadius: visionRadius)
         }
     }
     
