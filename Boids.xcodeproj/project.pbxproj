@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4D269CA49600F27575 /* ForceGenerators.swift */; };
+		BA510BA426A37E8A00C353E7 /* ParticleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA510BA326A37E8A00C353E7 /* ParticleShape.swift */; };
 		BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6143B2269BBF91000DEEAF /* BoidsView.swift */; };
 		BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61E637269B89C600CCBFFB /* BoidShape.swift */; };
 		BA7F351E269B775B001FE93D /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F351D269B775B001FE93D /* Compass.swift */; };
 		BA88874C26A1192500BA2CF3 /* CircleSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88874B26A1192500BA2CF3 /* CircleSector.swift */; };
 		BA88875B26A11BB300BA2CF3 /* CircleSectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88875A26A11BB300BA2CF3 /* CircleSectorTests.swift */; };
+		BA88875D26A124AD00BA2CF3 /* CircleSectorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88875C26A124AD00BA2CF3 /* CircleSectorShape.swift */; };
 		BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */; };
 		BA99E2F4269A3BFC00A97DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */; };
 		BA99E2F7269A3BFC00A97DFD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F6269A3BFC00A97DFD /* Preview Assets.xcassets */; };
@@ -34,12 +36,14 @@
 
 /* Begin PBXFileReference section */
 		BA060F4D269CA49600F27575 /* ForceGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceGenerators.swift; sourceTree = "<group>"; };
+		BA510BA326A37E8A00C353E7 /* ParticleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleShape.swift; sourceTree = "<group>"; };
 		BA6143B2269BBF91000DEEAF /* BoidsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsView.swift; sourceTree = "<group>"; };
 		BA61E637269B89C600CCBFFB /* BoidShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidShape.swift; sourceTree = "<group>"; };
 		BA7F351D269B775B001FE93D /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
 		BA88874B26A1192500BA2CF3 /* CircleSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSector.swift; sourceTree = "<group>"; };
 		BA88875126A11B9E00BA2CF3 /* BoidsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoidsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA88875A26A11BB300BA2CF3 /* CircleSectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSectorTests.swift; sourceTree = "<group>"; };
+		BA88875C26A124AD00BA2CF3 /* CircleSectorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSectorShape.swift; sourceTree = "<group>"; };
 		BA99E2EC269A3BFB00A97DFD /* Boids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsApp.swift; sourceTree = "<group>"; };
 		BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 				BA6143B2269BBF91000DEEAF /* BoidsView.swift */,
 				BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */,
 				BA61E637269B89C600CCBFFB /* BoidShape.swift */,
+				BA88875C26A124AD00BA2CF3 /* CircleSectorShape.swift */,
+				BA510BA326A37E8A00C353E7 /* ParticleShape.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,11 +262,13 @@
 				BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */,
 				BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */,
 				BAEDE4D7269A469E002B2BCE /* Vec2.swift in Sources */,
+				BA510BA426A37E8A00C353E7 /* ParticleShape.swift in Sources */,
 				BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */,
 				BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */,
 				BA7F351E269B775B001FE93D /* Compass.swift in Sources */,
 				BAEDE4D9269A487F002B2BCE /* Boid.swift in Sources */,
 				BA88874C26A1192500BA2CF3 /* CircleSector.swift in Sources */,
+				BA88875D26A124AD00BA2CF3 /* CircleSectorShape.swift in Sources */,
 				BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */,
 				BAEDE4DB269A48B8002B2BCE /* Flock.swift in Sources */,
 			);
