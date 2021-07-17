@@ -15,8 +15,6 @@ struct CircleSector {
     let width: Radians
     let radius: Double
     
-    // XCTAssertTrue failed - CircleSector(center: Boids.Vec2(x: 0.0, y: 0.0), heading: 3.9269908169872414, width: 0.39269908169872414, radius: 3.0) does not contain Vec2(x: -1.4142135623730954, y: -1.414213562373095)
-    
     func contains(_ point: Vec2) -> Bool {
         guard center.distance(to: point) <= radius else { return false }
         
