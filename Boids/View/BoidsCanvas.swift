@@ -24,7 +24,6 @@ struct BoidsCanvas: View {
                     let boidContext = context
                     let rect = viewRect(for: boid)
                     let color = boid.color
-                    boidContext.fill(ParticleShape(position: boid.position, radius: 2.0).path(in: fullCanvas), with: .color(.green))
                     boidContext.fill(BoidShape().rotation(Angle(radians: boid.velocity.direction + Double.pi/2), anchor: .top).path(in: rect), with: .color(color))
                     boidContext.stroke(CircleSectorShape(sector: boid.vision).path(in: fullCanvas), with: .color(Color(.sRGB, white: 1.0, opacity: 0.1)))
                 }
@@ -34,7 +33,7 @@ struct BoidsCanvas: View {
     }
     
     func viewRect(for boid: Boid) -> CGRect {
-        let boidSize = CGSize(width: 25, height: 20)
+        let boidSize = CGSize(width: 12, height: 20)
         let adjustedOrigin = CGPoint(x: boid.position.x - (boidSize.width/2), y: boid.position.y)
         return CGRect(origin: adjustedOrigin, size: boidSize)
     }
