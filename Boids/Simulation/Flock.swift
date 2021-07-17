@@ -37,7 +37,8 @@ struct Flock {
     
     var visionRadius = 100.0
     var maxSpeed = 300.0
-    var maxForce = 20.0
+    var minSpeed = 50.0
+    var maxForce = 50.0
     var northernForceEnabled = false
     
     mutating func update(time: Date, size: CGSize, northernForceEnabled: Bool) {
@@ -126,6 +127,7 @@ struct Flock {
             var boid = boid
             boid.velocity += (boid.acceleration)
             boid.velocity.limit(magnitude: maxSpeed)
+            boid.velocity.lowerBound(magnitude: minSpeed)
             boid.position += (boid.velocity * dt)
             return boid
         }

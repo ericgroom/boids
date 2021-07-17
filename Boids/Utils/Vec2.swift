@@ -34,6 +34,11 @@ struct Vec2: Equatable, Hashable {
         self.magnitude = magnitude
     }
     
+    mutating func lowerBound(magnitude: Double) {
+        guard self.magnitude < magnitude else { return }
+        self.magnitude = magnitude
+    }
+    
     func distance(to other: Vec2) -> Double {
         sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y))
     }
