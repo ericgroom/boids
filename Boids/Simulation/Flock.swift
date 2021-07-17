@@ -35,7 +35,7 @@ struct Flock {
     typealias Context = (t: Date, size: CGSize)
     private var context: Context?
     
-    var visionRadius = 50.0
+    var visionRadius = 100.0
     var maxSpeed = 300.0
     var maxForce = 20.0
     var northernForceEnabled = false
@@ -90,7 +90,7 @@ struct Flock {
         let forceGenerators: [(ForceGenerator, Double)] = [
             (alignmentForceGenerator, 0.25),
             (cohesionForceGenerator, 0.25),
-            (separationForceGenerator, 0.25),
+            (separationForceGenerator, 0.3),
             (northForceGenerator, northernForceEnabled ? 0.05 : 0.0),
         ]
         boids = boids.map { boid in

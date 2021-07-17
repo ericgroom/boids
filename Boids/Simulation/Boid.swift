@@ -26,6 +26,6 @@ struct Boid: Equatable {
     let color: Color = boidColors.randomElement()!
     
     var vision: CircleSector {
-        CircleSector(center: position, heading: velocity.direction, width: .pi/3, radius: visionRadius)
+        CircleSector(center: position, heading: velocity.direction, width: 5.23599, radius: visionRadius)
     }
 }
