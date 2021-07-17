@@ -22,9 +22,10 @@ struct CircleSector {
         let unnormalizedPointAngle = normalizedPoint.direction
         let pointAngle = unnormalizedPointAngle > 0 ? unnormalizedPointAngle : unnormalizedPointAngle + Double.pi*2
         
-        let startAngle = heading - width/2
-        let endAngle = heading + width/2
+        // https://stackoverflow.com/a/38515984/6335864
+        let dot = cos(heading)*cos(pointAngle) + sin(heading)*sin(pointAngle)
+        let angle = acos(dot)
         
-        return startAngle <= pointAngle &&  pointAngle <= endAngle
+        return angle <= (width/2)
     }
 }

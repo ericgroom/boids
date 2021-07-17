@@ -74,5 +74,21 @@ class CircleSectorTests: XCTestCase {
         XCTAssertTrue(sector.contains(containsPoint))
         XCTAssertFalse(sector.contains(doesntContainPoint))
     }
+    
+    func testAcrossZeroLine() {
+        let sector = CircleSector(center: .zero, heading: 0, width: .pi, radius: 50.0)
+        let south = Vec2(x: 20.0, y: -20.0)
+        let north = Vec2(x: 20.0, y: 20.0)
+        XCTAssertTrue(sector.contains(south))
+        XCTAssertTrue(sector.contains(north))
+    }
+    
+    func testAcrossPiLine() {
+        let sector = CircleSector(center: .zero, heading: .pi, width: .pi, radius: 50.0)
+        let south = Vec2(x: -20.0, y: -20.0)
+        let north = Vec2(x: -20.0, y: 20.0)
+        XCTAssertTrue(sector.contains(south))
+        XCTAssertTrue(sector.contains(north))
+    }
 
 }
