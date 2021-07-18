@@ -10,6 +10,7 @@ import SwiftUI
 struct BoidsCanvas: View {
     
     var seekNorthEnabled: Bool
+    var displayVision: Bool = false
     @StateObject private var flock = FlockWrapper()
     
     var body: some View {
@@ -25,7 +26,9 @@ struct BoidsCanvas: View {
                     let rect = viewRect(for: boid)
                     let color = boid.color
                     boidContext.fill(BoidShape().rotation(Angle(radians: boid.velocity.direction + Double.pi/2), anchor: .top).path(in: rect), with: .color(color))
-                    boidContext.stroke(CircleSectorShape(sector: boid.vision).path(in: fullCanvas), with: .color(Color(.sRGB, white: 1.0, opacity: 0.1)))
+                    if displayVision {
+                        boidContext.stroke(CircleSectorShape(sector: boid.vision).path(in: fullCanvas), with: .color(Color(.sRGB, white: 1.0, opacity: 0.1)))
+                    }
                 }
             }
             .edgesIgnoringSafeArea(.all)
