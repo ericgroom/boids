@@ -97,4 +97,8 @@ struct Vec2: Equatable, Hashable {
         lhs.x /= rhs
         lhs.y /= rhs
     }
+    
+    static prefix func -(_ vec: Self) -> Self {
+        vec * -1
+    }
 }
