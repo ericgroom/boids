@@ -8,64 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA060F4D269CA49600F27575 /* ForceGenerators.swift */; };
-		BA510BA426A37E8A00C353E7 /* ParticleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA510BA326A37E8A00C353E7 /* ParticleShape.swift */; };
 		BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6143B2269BBF91000DEEAF /* BoidsView.swift */; };
 		BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA61E637269B89C600CCBFFB /* BoidShape.swift */; };
+		BA675DD826A4F95800D533D7 /* SimulationKit in Frameworks */ = {isa = PBXBuildFile; productRef = BA675DD726A4F95800D533D7 /* SimulationKit */; };
+		BA675DDA26A4F95800D533D7 /* SimulationKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BA675DD926A4F95800D533D7 /* SimulationKitUI */; };
 		BA7F351E269B775B001FE93D /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F351D269B775B001FE93D /* Compass.swift */; };
-		BA88874C26A1192500BA2CF3 /* CircleSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88874B26A1192500BA2CF3 /* CircleSector.swift */; };
-		BA88875B26A11BB300BA2CF3 /* CircleSectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88875A26A11BB300BA2CF3 /* CircleSectorTests.swift */; };
-		BA88875D26A124AD00BA2CF3 /* CircleSectorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88875C26A124AD00BA2CF3 /* CircleSectorShape.swift */; };
 		BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */; };
 		BA99E2F4269A3BFC00A97DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */; };
 		BA99E2F7269A3BFC00A97DFD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA99E2F6269A3BFC00A97DFD /* Preview Assets.xcassets */; };
 		BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */; };
-		BAEDE4D7269A469E002B2BCE /* Vec2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDE4D6269A469E002B2BCE /* Vec2.swift */; };
 		BAEDE4D9269A487F002B2BCE /* Boid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDE4D8269A487F002B2BCE /* Boid.swift */; };
 		BAEDE4DB269A48B8002B2BCE /* Flock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDE4DA269A48B8002B2BCE /* Flock.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		BA88875526A11B9E00BA2CF3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BA99E2E4269A3BFA00A97DFD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BA99E2EB269A3BFA00A97DFD;
-			remoteInfo = Boids;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		BA060F4D269CA49600F27575 /* ForceGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceGenerators.swift; sourceTree = "<group>"; };
-		BA510BA326A37E8A00C353E7 /* ParticleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleShape.swift; sourceTree = "<group>"; };
 		BA6143B2269BBF91000DEEAF /* BoidsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsView.swift; sourceTree = "<group>"; };
 		BA61E637269B89C600CCBFFB /* BoidShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidShape.swift; sourceTree = "<group>"; };
 		BA7F351D269B775B001FE93D /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
-		BA88874B26A1192500BA2CF3 /* CircleSector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSector.swift; sourceTree = "<group>"; };
-		BA88875126A11B9E00BA2CF3 /* BoidsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoidsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA88875A26A11BB300BA2CF3 /* CircleSectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSectorTests.swift; sourceTree = "<group>"; };
-		BA88875C26A124AD00BA2CF3 /* CircleSectorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSectorShape.swift; sourceTree = "<group>"; };
 		BA99E2EC269A3BFB00A97DFD /* Boids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99E2EF269A3BFB00A97DFD /* BoidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsApp.swift; sourceTree = "<group>"; };
 		BA99E2F3269A3BFC00A97DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA99E2F6269A3BFC00A97DFD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoidsCanvas.swift; sourceTree = "<group>"; };
-		BAEDE4D6269A469E002B2BCE /* Vec2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vec2.swift; sourceTree = "<group>"; };
 		BAEDE4D8269A487F002B2BCE /* Boid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boid.swift; sourceTree = "<group>"; };
 		BAEDE4DA269A48B8002B2BCE /* Flock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		BA88874E26A11B9E00BA2CF3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BA99E2E9269A3BFA00A97DFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA675DDA26A4F95800D533D7 /* SimulationKitUI in Frameworks */,
+				BA675DD826A4F95800D533D7 /* SimulationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,8 +55,6 @@
 				BA6143B2269BBF91000DEEAF /* BoidsView.swift */,
 				BA99E2FD269A3CBC00A97DFD /* BoidsCanvas.swift */,
 				BA61E637269B89C600CCBFFB /* BoidShape.swift */,
-				BA88875C26A124AD00BA2CF3 /* CircleSectorShape.swift */,
-				BA510BA326A37E8A00C353E7 /* ParticleShape.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,25 +73,14 @@
 			isa = PBXGroup;
 			children = (
 				BA7F351D269B775B001FE93D /* Compass.swift */,
-				BAEDE4D6269A469E002B2BCE /* Vec2.swift */,
-				BA88874B26A1192500BA2CF3 /* CircleSector.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		BA88875226A11B9E00BA2CF3 /* BoidsTests */ = {
-			isa = PBXGroup;
-			children = (
-				BA88875A26A11BB300BA2CF3 /* CircleSectorTests.swift */,
-			);
-			path = BoidsTests;
 			sourceTree = "<group>";
 		};
 		BA99E2E3269A3BFA00A97DFD = {
 			isa = PBXGroup;
 			children = (
 				BA99E2EE269A3BFB00A97DFD /* Boids */,
-				BA88875226A11B9E00BA2CF3 /* BoidsTests */,
 				BA99E2ED269A3BFB00A97DFD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -126,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				BA99E2EC269A3BFB00A97DFD /* Boids.app */,
-				BA88875126A11B9E00BA2CF3 /* BoidsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,24 +116,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BA88875026A11B9E00BA2CF3 /* BoidsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BA88875726A11B9E00BA2CF3 /* Build configuration list for PBXNativeTarget "BoidsTests" */;
-			buildPhases = (
-				BA88874D26A11B9E00BA2CF3 /* Sources */,
-				BA88874E26A11B9E00BA2CF3 /* Frameworks */,
-				BA88874F26A11B9E00BA2CF3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BA88875626A11B9E00BA2CF3 /* PBXTargetDependency */,
-			);
-			name = BoidsTests;
-			productName = BoidsTests;
-			productReference = BA88875126A11B9E00BA2CF3 /* BoidsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		BA99E2EB269A3BFA00A97DFD /* Boids */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA99E2FA269A3BFC00A97DFD /* Build configuration list for PBXNativeTarget "Boids" */;
@@ -185,6 +129,10 @@
 			dependencies = (
 			);
 			name = Boids;
+			packageProductDependencies = (
+				BA675DD726A4F95800D533D7 /* SimulationKit */,
+				BA675DD926A4F95800D533D7 /* SimulationKitUI */,
+			);
 			productName = Boids;
 			productReference = BA99E2EC269A3BFB00A97DFD /* Boids.app */;
 			productType = "com.apple.product-type.application";
@@ -199,10 +147,6 @@
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
-					BA88875026A11B9E00BA2CF3 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = BA99E2EB269A3BFA00A97DFD;
-					};
 					BA99E2EB269A3BFA00A97DFD = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -217,24 +161,19 @@
 				Base,
 			);
 			mainGroup = BA99E2E3269A3BFA00A97DFD;
+			packageReferences = (
+				BA675DD626A4F95800D533D7 /* XCRemoteSwiftPackageReference "SimulationKit" */,
+			);
 			productRefGroup = BA99E2ED269A3BFB00A97DFD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BA99E2EB269A3BFA00A97DFD /* Boids */,
-				BA88875026A11B9E00BA2CF3 /* BoidsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BA88874F26A11B9E00BA2CF3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BA99E2EA269A3BFA00A97DFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,28 +186,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BA88874D26A11B9E00BA2CF3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA88875B26A11BB300BA2CF3 /* CircleSectorTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BA99E2E8269A3BFA00A97DFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BA99E2FE269A3CBC00A97DFD /* BoidsCanvas.swift in Sources */,
 				BA61E638269B89C600CCBFFB /* BoidShape.swift in Sources */,
-				BAEDE4D7269A469E002B2BCE /* Vec2.swift in Sources */,
-				BA510BA426A37E8A00C353E7 /* ParticleShape.swift in Sources */,
 				BA99E2F0269A3BFB00A97DFD /* BoidsApp.swift in Sources */,
 				BA060F4E269CA49600F27575 /* ForceGenerators.swift in Sources */,
 				BA7F351E269B775B001FE93D /* Compass.swift in Sources */,
 				BAEDE4D9269A487F002B2BCE /* Boid.swift in Sources */,
-				BA88874C26A1192500BA2CF3 /* CircleSector.swift in Sources */,
-				BA88875D26A124AD00BA2CF3 /* CircleSectorShape.swift in Sources */,
 				BA6143B3269BBF91000DEEAF /* BoidsView.swift in Sources */,
 				BAEDE4DB269A48B8002B2BCE /* Flock.swift in Sources */,
 			);
@@ -276,63 +203,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		BA88875626A11B9E00BA2CF3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BA99E2EB269A3BFA00A97DFD /* Boids */;
-			targetProxy = BA88875526A11B9E00BA2CF3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		BA88875826A11B9E00BA2CF3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9AH9J2C937;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ericgroom.BoidsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Boids.app/Boids";
-			};
-			name = Debug;
-		};
-		BA88875926A11B9E00BA2CF3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9AH9J2C937;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ericgroom.BoidsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Boids.app/Boids";
-			};
-			name = Release;
-		};
 		BA99E2F8269A3BFC00A97DFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -512,15 +383,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BA88875726A11B9E00BA2CF3 /* Build configuration list for PBXNativeTarget "BoidsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BA88875826A11B9E00BA2CF3 /* Debug */,
-				BA88875926A11B9E00BA2CF3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		BA99E2E7269A3BFA00A97DFD /* Build configuration list for PBXProject "Boids" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -540,6 +402,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BA675DD626A4F95800D533D7 /* XCRemoteSwiftPackageReference "SimulationKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ericgroom/SimulationKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BA675DD726A4F95800D533D7 /* SimulationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA675DD626A4F95800D533D7 /* XCRemoteSwiftPackageReference "SimulationKit" */;
+			productName = SimulationKit;
+		};
+		BA675DD926A4F95800D533D7 /* SimulationKitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA675DD626A4F95800D533D7 /* XCRemoteSwiftPackageReference "SimulationKit" */;
+			productName = SimulationKitUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BA99E2E4269A3BFA00A97DFD /* Project object */;
 }

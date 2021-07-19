@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SimulationKit
+import SimulationKitUI
 
 struct BoidsCanvas: View {
     

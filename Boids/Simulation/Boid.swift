@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SimulationKit
 
 let boidColors = [
     Color("Blue"),

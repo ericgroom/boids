@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SimulationKit
 
 typealias Force = Vec2
 typealias ForceGenerator = (Boid, NeighborFinder, ForceConfiguration) -> Force

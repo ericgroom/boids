@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SimulationKit
 
 @dynamicMemberLookup
 class FlockWrapper: ObservableObject {

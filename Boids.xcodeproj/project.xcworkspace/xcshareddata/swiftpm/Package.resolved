@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SimulationKit",
+        "repositoryURL": "https://github.com/ericgroom/SimulationKit",
+        "state": {
+          "branch": "master",
+          "revision": "88139075e2d2d3d83b811895cd05840d1d8f6e88",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
